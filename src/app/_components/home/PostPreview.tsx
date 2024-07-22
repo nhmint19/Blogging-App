@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "./base/Button";
+import { Button } from "../core/Button";
 
-export default function PostPreview({
+export function PostPreview({
   data,
-  showImage,
 }: {
   data: {
     author: string;
@@ -15,14 +14,21 @@ export default function PostPreview({
     imageUrl?: string;
     postUrl: string;
   };
-  showImage?: boolean;
 }) {
   const { author, avatarUrl, date, title, tags, imageUrl, postUrl } = data;
 
   return (
     <div className="card !p-0">
       <div className="w-full">
-        {imageUrl && <Image src={imageUrl} width="500" height="650" alt="preview" className="w-full rounded-t-md" />}
+        {imageUrl && (
+          <Image
+            src={imageUrl}
+            width="500"
+            height="650"
+            alt="preview"
+            className="w-full rounded-t-md"
+          />
+        )}
       </div>
       <div className="p-4">
         <div className="flex items-center gap-2">

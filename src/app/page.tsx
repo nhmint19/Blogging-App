@@ -1,9 +1,13 @@
-import { Button } from "@/components/base/Button";
-import { NavBar } from "@/components/NavBar";
-import PostPreview from "@/components/PostPreview";
+import { Button } from "@/app/_components/core/Button";
+import { NavBar } from "@/app/_components/home/NavBar";
+import { PostPreview } from "@/app/_components/home/PostPreview";
 import Link from "next/link";
+import { auth } from "./api/auth/[...nextauth]/route";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+  const user = session?.user;
+
   return (
     <div>
       <NavBar />
@@ -12,16 +16,18 @@ export default function Home() {
           {/* Navigation drawer */}
           <aside className="w-[240px]">
             <div className="card">
-              <p className="title">DEV Community is a community of 1,800,526 amazing developers</p>
+              <p className="title">DEV Community is a community of 1,793,625 amazing developers</p>
               <p className="text-secondary">
                 We're a place where coders share, stay up-to-date and grow their careers.
               </p>
-              <div className="grid gap-1">
-                <Button isPrimary isFullWidth>
-                  Create account
-                </Button>
-                <Button isFullWidth>Log in</Button>
-              </div>
+              {!user && (
+                <div className="grid gap-1">
+                  <Button isPrimary isFullWidth>
+                    Create account
+                  </Button>
+                  <Button isFullWidth>Log in</Button>
+                </div>
+              )}
             </div>
           </aside>
           <div className="flex flex-1">
@@ -36,7 +42,7 @@ export default function Home() {
                   <Button noUnderline>Latest</Button>
                   <Button noUnderline>Top</Button>
                 </div>
-                {/* dummy data */}
+                {/* Dummy data */}
                 <PostPreview
                   data={{
                     author: "Minh Nguyen",
@@ -44,7 +50,7 @@ export default function Home() {
                     title: "How coding makes you sleep well",
                     tags: ["devto", "sample", "dummy"],
                     postUrl: "/",
-                    imageUrl: "/thumbnail.png"
+                    imageUrl: "/thumbnail.png",
                   }}
                 />
                 <PostPreview

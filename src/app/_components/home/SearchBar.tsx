@@ -8,7 +8,7 @@ export function SearchBar() {
       </button>
       <input
         type="text"
-        className="px-2 border-none rounded-lg focus:outline-none focus:ring-0 placeholder-gray-600"
+        className="px-2 border-none rounded-lg focus:outline-none focus:ring-0 placeholder-gray-600 h-6"
         placeholder="Search..."
       />
       <span className="absolute right-2 bottom-2 flex items-center text-xs text-gray-500">

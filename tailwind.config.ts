@@ -2,6 +2,7 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
+    "./node_modules/flowbite-react/lib/**/*.js",
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -24,9 +25,14 @@ const config: Config = {
           DEFAULT: "#4B5563",
           dark: "#4B5563",
         },
+        danger: {
+          light: "#FF0000",
+          DEFAULT: "#FF0000",
+          dark: "#FF0000",
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms"), require("flowbite/plugin")],
 };
 export default config;

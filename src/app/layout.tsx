@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import "./globals.css";
+import Provider from "./_trpc/Provider";
+
+export const metadata: Metadata = {
+  title: "Minh",
+  description: "Minh's blogging app",
+};
 
 export default function RootLayout({
   children,
@@ -7,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Provider>{children}</Provider>
+      </body>
     </html>
   );
 }

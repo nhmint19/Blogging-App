@@ -1,14 +1,15 @@
 import { AuthList } from "@/app/_components/auth/AuthList";
-import { auth } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import { auth } from "@/app/api/auth/[...nextauth]/route";
+import SignUpForm from "@/app/_components/auth/SignUpForm";
 
-export default async function Auth({
+export default async function SignUp({
   searchParams,
 }: {
   searchParams: { state: string | undefined };
 }) {
   const { state } = searchParams;
-  const isNewUser = state === "new-user";
+  const isSignUp = state === "email_signup";
 
   const session = await auth();
   const user = session?.user;
@@ -16,5 +17,9 @@ export default async function Auth({
     redirect("/");
   }
 
-  return <AuthList isNewUser={isNewUser} />;
+  if (!isSignUp) {
+    return <AuthList isNewUser={isSignUp} />;
+  }
+
+  return <SignUpForm />;
 }

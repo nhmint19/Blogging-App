@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ReactElement } from "react";
 
 export function Button({
@@ -5,34 +6,46 @@ export function Button({
   withPadding = true,
   isFullWidth = false,
   noUnderline = false,
+  isDisabled = false,
   children,
   customClass,
   onClick,
+  route,
+  type,
 }: {
   isPrimary?: boolean;
   withPadding?: boolean;
   isFullWidth?: boolean;
   noUnderline?: boolean;
+  isDisabled?: boolean;
   children?: ReactElement | string;
   customClass?: string;
   onClick?: () => void;
+  route?: string;
+  type?: "submit" | "reset" | "button";
 }) {
-  const buttonStyle = isPrimary
-    ? "font-semibold text-primary border border-primary hover:text-white "
-    : "text-secondary hover:text-primary hover:bg-opacity-10";
+  const buttonStyle = isDisabled
+    ? "bg-gray-300 text-white cursor-not-allowed"
+    : isPrimary
+    ? "font-semibold text-primary border border-primary hover:bg-primary hover:text-white "
+    : "text-secondary hover:text-primary hover:bg-primary hover:bg-opacity-10";
 
   const padding = withPadding ? "px-3 py-2" : "";
 
   const width = isFullWidth ? "w-full" : "";
 
-  return (
+  const button = (
     <button
+      disabled={isDisabled}
+      type={type}
       onClick={onClick}
       className={`${padding} rounded-md ${
         noUnderline ? "" : "hover:underline"
-      } hover:bg-primary ${buttonStyle} ${width} ${customClass}`}
+      }  ${buttonStyle} ${width} ${customClass}`}
     >
       {children}
     </button>
   );
+
+  return route ? <Link href={route}>{button}</Link> : button;
 }
