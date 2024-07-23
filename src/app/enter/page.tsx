@@ -1,5 +1,5 @@
 import { AuthList } from "@/app/_components/auth/AuthList";
-import { auth } from "../api/auth/[...nextauth]/route";
+import { auth } from "@/utils/auth";
 import { redirect } from "next/navigation";
 
 export default async function Auth({

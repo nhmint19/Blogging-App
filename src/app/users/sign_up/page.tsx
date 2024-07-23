@@ -1,6 +1,6 @@
 import { AuthList } from "@/app/_components/auth/AuthList";
 import { redirect } from "next/navigation";
-import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { auth } from "@/utils/auth";
 import SignUpForm from "@/app/_components/auth/SignUpForm";
 
 export default async function SignUp({

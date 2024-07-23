@@ -1,6 +1,6 @@
 import { publicProcedure } from "../trpc";
 import { loginSchema } from "../schemas/loginSchema";
-import { signIn } from "@/app/api/auth/[...nextauth]/route";
+import { signIn } from "@/utils/auth";
 import { AuthError } from "next-auth";
 
 export const login = publicProcedure

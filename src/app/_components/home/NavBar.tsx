@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "../core/Button";
 import { SearchBar } from "./SearchBar";
 import Image from "next/image";
-import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { auth } from "@/utils/auth";
 import { AvatarDropdown } from "./AvatarDropdown";
 
 export async function NavBar() {

@@ -2,7 +2,7 @@ import { Button } from "@/app/_components/core/Button";
 import { NavBar } from "@/app/_components/home/NavBar";
 import { PostPreview } from "@/app/_components/home/PostPreview";
 import Link from "next/link";
-import { auth } from "./api/auth/[...nextauth]/route";
+import { auth } from "@/utils/auth";
 
 export default async function Home() {
   const session = await auth();
@@ -18,7 +18,7 @@ export default async function Home() {
             <div className="card">
               <p className="title">DEV Community is a community of 1,793,625 amazing developers</p>
               <p className="text-secondary">
-                We're a place where coders share, stay up-to-date and grow their careers.
+                We&apos;re a place where coders share, stay up-to-date and grow their careers.
               </p>
               {!user && (
                 <div className="grid gap-1">
@@ -67,7 +67,7 @@ export default async function Home() {
             <div className="w-1/3">
               {/* Discussion and billboard */}
               <div className="card">
-                <p className="text-secondary text-sm">👋 What's happening this week</p>
+                <p className="text-secondary text-sm">👋 What&apos;s happening this week</p>
                 <p className="title">Challenges</p>
                 <div className="border border-black p-3">
                   <p>Running until August 18 </p>

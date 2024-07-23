@@ -36,7 +36,7 @@ export function AuthList({ isNewUser }: { isNewUser: boolean }) {
     } else if (login.status === "error") {
       setError("root.serverError", { message: login.error.message });
     }
-  }, [login.status]);
+  }, [login, setError]);
 
   return (
     <div className="flex flex-col items-center h-full w-full p-12">
