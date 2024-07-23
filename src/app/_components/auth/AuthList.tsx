@@ -50,12 +50,12 @@ export function AuthList({ isNewUser }: { isNewUser: boolean }) {
           <SignInButton logo="/logos/logo-apple.svg" name="Apple" isNewUser />
           <SignInButton logo="/logos/logo-facebook.svg" name="Facebook" isNewUser />
           <SignInButton logo="/logos/logo-forem.svg" name="Forem" isNewUser />
-          <SignInButton logo="/logos/logo-github.svg" name="GitHub" isNewUser />
-          <SignInButton logo="/logos/logo-google.svg" name="Google" isNewUser />
+          <SignInButton logo="/logos/logo-github.svg" name="GitHub" isNewUser oAuthProvider="github"/>
+          <SignInButton logo="/logos/logo-google.svg" name="Google" isNewUser oAuthProvider="google"/>
           <SignInButton logo="/logos/logo-twitter.svg" name="Twitter" isNewUser />
           {isNewUser && (
             <Link href="/users/sign_up?state=email_signup" className="w-full">
-              <SignInButton logo="/icons/email.svg" name="Email" isNewUser />
+              <SignInButton logo="/icons/email.svg" name="Email" isNewUser/>
             </Link>
           )}
         </div>

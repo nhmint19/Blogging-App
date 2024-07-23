@@ -1,5 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
 import { prisma } from "@/server/prisma";
 import { loginSchema } from "@/server/schemas/loginSchema";
 import { verify } from "argon2";
@@ -39,6 +41,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         };
       },
     }),
+    GitHub,
+    Google,
   ],
   callbacks: {
     jwt: async ({ token, user }) => {
