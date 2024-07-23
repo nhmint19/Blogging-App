@@ -8,7 +8,9 @@ const createCaller = createCallerFactory(appRouter);
 export const serverClient = createCaller({
   links: [
     httpBatchLink({
-      url: `http://localhost:3000/api/trpc`,
+      url: process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}/api/trpc`
+        : "http://localhost:3000/api/trpc",
     }),
   ],
 });

@@ -12,7 +12,7 @@ export function AvatarDropdown({ user }: { user: User }) {
       arrowIcon={false}
       inline
     >
-      <div className="w-[250px] p-2">
+      <div className="w-[250px] p-2 bg-white">
         <Button isFullWidth>
           <DropdownHeader className="text-start p-0">
             <span className="block font-bold text-base">{user.name}</span>
