@@ -66,8 +66,9 @@ export function Account({ id }: { id: string }) {
             </div>
           </div>
           <div className="col-span-8 grid grid-rows-12 gap-4">
-            {posts?.map((post) => (
+            {posts?.map((post, id) => (
               <PostPreview
+                key={id}
                 data={{
                   author: name || "",
                   avatarUrl: avatarUrl || "",

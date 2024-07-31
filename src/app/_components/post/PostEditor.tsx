@@ -35,7 +35,7 @@ export default function PostEditor({ email }: { email: string }) {
   useEffect(() => {
     setValue("content", content, { shouldValidate: true });
     setValue("email", email, { shouldValidate: true });
-  }, [setValue, content]);
+  }, [setValue, content, email]);
 
   useEffect(() => {
     if (createPost.status === "success") {
