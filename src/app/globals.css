@@ -65,6 +65,18 @@ body {
   line-height: 1.25rem;
 }
 
+.half-bg {
+  background: linear-gradient(to bottom, #000 50%, #fff 50%);
+}
+
+p.is-editor-empty:first-child::before {
+  color: var(--gray-4);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

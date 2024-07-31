@@ -25,6 +25,11 @@ const config: Config = {
           DEFAULT: "#4B5563",
           dark: "#4B5563",
         },
+        tertiary: {
+          light: "#FEF5E6",
+          DEFAULT: "#FEF5E6",
+          dark: "#FEF5E6",
+        },
         danger: {
           light: "#FF0000",
           DEFAULT: "#FF0000",

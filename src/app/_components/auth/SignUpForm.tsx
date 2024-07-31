@@ -35,7 +35,7 @@ export default function SignUpForm() {
     } else if (signup.status === "error") {
       setError("root.serverError", { message: signup.error.message });
     }
-  }, [signup, setError, router]);
+  }, [signup.status, signup.error, setError, router]);
 
   return (
     <div className="flex justify-center">

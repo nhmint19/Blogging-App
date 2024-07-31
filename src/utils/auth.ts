@@ -1,12 +1,15 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import GitHub from "next-auth/providers/github";
-import Google from "next-auth/providers/google";
+import GitHub, { type GitHubProfile } from "next-auth/providers/github";
+import Google, { type GoogleProfile } from "next-auth/providers/google";
 import { prisma } from "@/server/prisma";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import { loginSchema } from "@/server/schemas/loginSchema";
 import { verify } from "argon2";
+import { convertNameToUsername } from "./convertNameToUsername";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
+  adapter: PrismaAdapter(prisma),
   providers: [
     Credentials({
       name: "credentials",
@@ -28,6 +31,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           throw new Error("User not found");
         }
 
+        if (!user.password) {
+          throw new Error("User has not set password. Try other authentication methods instead");
+        }
+
         const isValidPassword = await verify(user.password, creds.password);
 
         if (!isValidPassword) {
@@ -37,12 +44,32 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         return {
           id: user.id,
           email: user.email,
-          name: user.name,
+          name: user.username,
         };
       },
     }),
-    GitHub,
-    Google,
+    GitHub({
+      profile(profile: GitHubProfile) {
+        return {
+          name: profile.name,
+          email: profile.email,
+          image: profile.avatar_url,
+          username: convertNameToUsername(profile.name),
+        };
+      },
+      allowDangerousEmailAccountLinking: true,
+    }),
+    Google({
+      profile(profile: GoogleProfile) {
+        return {
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+          username: convertNameToUsername(profile.name),
+        };
+      },
+      allowDangerousEmailAccountLinking: true,
+    }),
   ],
   callbacks: {
     jwt: async ({ token, user }) => {

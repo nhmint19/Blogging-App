@@ -3,10 +3,13 @@ import { NavBar } from "@/app/_components/home/NavBar";
 import { PostPreview } from "@/app/_components/home/PostPreview";
 import Link from "next/link";
 import { auth } from "@/utils/auth";
+import NavigationDrawer from "./_components/home/NavigationDrawer";
+import TempDiscussion from "./_components/temp/TempDiscussion";
 
 export default async function Home() {
   const session = await auth();
   const user = session?.user;
+  console.log(user);
 
   return (
     <div>
@@ -22,12 +25,17 @@ export default async function Home() {
               </p>
               {!user && (
                 <div className="grid gap-1">
-                  <Button isPrimary isFullWidth>
+                  <Button isPrimary isFullWidth route="/enter?state=new-user">
                     Create account
                   </Button>
-                  <Button isFullWidth>Log in</Button>
+                  <Button isFullWidth route="/enter">
+                    Log in
+                  </Button>
                 </div>
               )}
+            </div>
+            <div className="py-2">
+              <NavigationDrawer />
             </div>
           </aside>
           <div className="flex flex-1">
@@ -66,18 +74,7 @@ export default async function Home() {
             </div>
             <div className="w-1/3">
               {/* Discussion and billboard */}
-              <div className="card">
-                <p className="text-secondary text-sm">👋 What&apos;s happening this week</p>
-                <p className="title">Challenges</p>
-                <div className="border border-black p-3">
-                  <p>Running until August 18 </p>
-                  <Link href="/" className="underline text-primary">
-                    <p className="font-bold">Build Better on Stellar: Smart Contract Challenge</p>
-                  </Link>
-                  <p className="italic text-sm">50k in prizes!</p>
-                </div>
-                <p className="text-secondary">Have a great week ❤️</p>
-              </div>
+              <TempDiscussion />
             </div>
           </div>
         </div>

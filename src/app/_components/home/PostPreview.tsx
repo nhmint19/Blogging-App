@@ -19,8 +19,8 @@ export function PostPreview({
 
   return (
     <div className="card !p-0">
-      <div className="w-full">
-        {imageUrl && (
+      {imageUrl && (
+        <div className="w-full">
           <Image
             src={imageUrl}
             width="500"
@@ -28,12 +28,14 @@ export function PostPreview({
             alt="preview"
             className="w-full rounded-t-md"
           />
-        )}
-      </div>
+        </div>
+      )}
       <div className="p-4">
         <div className="flex items-center gap-2">
           <div className="border border-gray-300 w-8 h-8 rounded-full">
-            {avatarUrl && <Image src={avatarUrl} alt="U" width="32" height="32" />}
+            {avatarUrl && (
+              <Image src={avatarUrl} alt="U" width="32" height="32" className="rounded-full" />
+            )}
           </div>
           <div>
             <p className="text-sm font-semibold">{author}</p>

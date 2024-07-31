@@ -20,7 +20,7 @@ export function Button({
   isDisabled?: boolean;
   children?: ReactElement | string;
   customClass?: string;
-  onClick?: () => void;
+  onClick?: (event?: any) => void;
   route?: string;
   type?: "submit" | "reset" | "button";
 }) {

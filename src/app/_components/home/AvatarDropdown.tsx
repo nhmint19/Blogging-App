@@ -4,8 +4,13 @@ import { Avatar, Dropdown, DropdownDivider, DropdownHeader, DropdownItem } from 
 import { Button } from "../core/Button";
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { convertNameToUsername } from "@/utils/convertNameToUsername";
 
 export function AvatarDropdown({ user }: { user: User }) {
+  const router = useRouter();
+  const usernameUri = convertNameToUsername(user.name);
+
   return (
     <Dropdown
       label={<Avatar alt="User settings" img="/temp-avatar.jpg" rounded size="sm" />}
@@ -13,10 +18,10 @@ export function AvatarDropdown({ user }: { user: User }) {
       inline
     >
       <div className="w-[250px] p-2 bg-white">
-        <Button isFullWidth>
+        <Button isFullWidth onClick={() => router.push(`/${usernameUri}`)}>
           <DropdownHeader className="text-start p-0">
             <span className="block font-bold text-base">{user.name}</span>
-            <span className="block text-secondary">{user.email}</span>
+            <span className="block text-secondary truncate">{user.email}</span>
           </DropdownHeader>
         </Button>
         <DropdownDivider className="bg-gray-200 h-[1px] my-1" />
@@ -24,7 +29,7 @@ export function AvatarDropdown({ user }: { user: User }) {
           <Button isFullWidth withPadding={false}>
             <DropdownItem className="text-base hover:bg-transparent">Dashboard</DropdownItem>
           </Button>
-          <Button isFullWidth withPadding={false}>
+          <Button isFullWidth withPadding={false} route="/new">
             <DropdownItem className="text-base hover:bg-transparent">Create Post</DropdownItem>
           </Button>
           <Button isFullWidth withPadding={false}>
